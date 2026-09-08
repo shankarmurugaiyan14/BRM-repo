@@ -1,0 +1,53 @@
+create database erpdb;
+
+DROP TABLE customerdet;
+
+CREATE TABLE customerdet (
+  CustomerID INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  CompanyName VARCHAR(100),
+  Address VARCHAR(200),
+  State VARCHAR(30),
+  City VARCHAR(30),
+  MobileNo VARCHAR(11),
+  Email VARCHAR(30),
+  Fax VARCHAR(20),
+  PRIMARY KEY (CustomerID)
+);
+
+INSERT INTO customerdet (CompanyName, Address, State, City, MobileNo, Email, Fax) VALUES
+('Tata Motors', '123 Industrial Area', 'Maharashtra', 'Mumbai', '9876543210', 'contact@tatamotors.com', '022-123456'),
+('Infosys Ltd', '44 Electronic City', 'Karnataka', 'Bangalore', '9988776655', 'hr@infosys.com', '080-998877'),
+('Hindustan Unilever', '78 FMCG Park', 'Tamil Nadu', 'Chennai', '9112233445', 'support@hul.co.in', '044-334455');
+
+
+select * from customerdet;
+
+
+
+
+
+
+drop table orderdetails;
+
+CREATE TABLE orderdetails (
+  orderId INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  customerId INT UNSIGNED NOT NULL,
+  product VARCHAR(100),
+  quantity INT NOT NULL DEFAULT 0,
+  price DECIMAL(10,2) NOT NULL DEFAULT 0,
+  PRIMARY KEY (orderId),
+  FOREIGN KEY (customerId) REFERENCES customerdet(CustomerID)
+  ON DELETE CASCADE
+);
+
+INSERT INTO orderdetails (customerId, product, quantity, price) VALUES
+(1, 'Truck Engine', 2, 1200000.00),
+(2, 'Laptop', 5, 55000.00),
+(3, 'Shampoo Bottles', 100, 120.50);
+
+
+select * from orderdetails;
+
+
+
+SELECT CustomerID FROM customerdet WHERE CompanyName = 'Infosys' LIMIT 1;
