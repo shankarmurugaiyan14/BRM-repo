@@ -1,0 +1,10 @@
+replicas: 5
+image: shankarmurugaiyan/calculator-frontend:v2-dynamic
+imagePullPolicy: always
+port: 80
+
+calculatorService:
+   type: NodePort
+   port: 80
+   targetPort: 80
+   nodePort: 
